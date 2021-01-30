@@ -6,4 +6,10 @@ datasources:
     url: jdbc:mysql://127.0.0.1:3316/main_db
     username: scott
     password: tiger
+flyway:
+  datasources:
+    default:
+      enabled: true
+      locations:
+        - classpath:migrations
 
