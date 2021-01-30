@@ -33,6 +33,8 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    runtime("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtime("mysql:mysql-connector-java:8.0.19")
 }
 
 
