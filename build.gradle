@@ -7,7 +7,7 @@ plugins {
 }
 
 version = "0.1"
-group = "com.example"
+group = "com.github.fidherman08.micronautbooks"
 
 repositories {
     mavenCentral()
@@ -19,7 +19,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("com.example.*")
+        annotations("com.github.fisherman08.micronautbooks.*")
     }
 }
 
@@ -37,7 +37,7 @@ dependencies {
 
 
 application {
-    mainClass.set("com.example.ApplicationKt")
+    mainClass.set("com.github.fisherman08.micronautbooks.ApplicationKt")
 }
 
 java {
