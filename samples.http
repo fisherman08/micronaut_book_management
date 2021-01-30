@@ -1,0 +1,6 @@
+
+# 書籍リスト
+GET http://localhost:8080/api/book/list
+Accept: application/json
+
+###
