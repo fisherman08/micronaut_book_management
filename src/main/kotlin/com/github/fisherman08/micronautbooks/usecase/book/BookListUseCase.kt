@@ -6,5 +6,11 @@ import javax.inject.Singleton
 @Singleton
 class BookListUseCase {
     // TODO: 動作確認のための仮実装
-    operator fun invoke(): List<Book> = emptyList()
+    operator fun invoke(): List<Book> =
+        listOf(
+            Book.register(
+                title = "吾輩は猫である",
+                authors = emptyList()
+            )
+        )
 }
