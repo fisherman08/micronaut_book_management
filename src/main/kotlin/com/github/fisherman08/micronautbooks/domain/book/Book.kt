@@ -8,10 +8,10 @@ data class Book(
     val authors: Authors
 ) {
     companion object {
-        fun register(title: String, authors: Collection<Writer>): Book =
+        fun register(title: BookTitle, authors: Collection<Writer>): Book =
             Book(
                 id = BookId.generate(),
-                title = BookTitle.fromString(value = title),
+                title = title,
                 authors = Authors.fromCollection(collection = authors)
             )
     }

@@ -2,6 +2,7 @@ package com.github.fisherman08.micronautbooks.controller.book
 
 import com.github.fisherman08.micronautbooks.controller.ApiPaths
 import com.github.fisherman08.micronautbooks.domain.book.Book
+import com.github.fisherman08.micronautbooks.domain.book.BookTitle
 import com.github.fisherman08.micronautbooks.usecase.book.BookRegisterUseCase
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
@@ -15,7 +16,7 @@ class BookRegisterController(
 ) {
     @Post
     fun registerBook(@Body body: RequestBody): ResponseBody {
-        val book = register(body.title)
+        val book = register(BookTitle.fromString(body.title))
         return ResponseBody(id = book.id.value, title = book.title.value)
     }
 

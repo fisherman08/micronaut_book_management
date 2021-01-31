@@ -57,7 +57,7 @@ class JooqBookRepositoryTest(
 
     "save: 新規登録できる" {
         val book = Book.register(
-            title = "人間失格",
+            title = BookTitle.fromString("人間失格"),
             authors = emptyList()
         )
         repository.save(book)
@@ -68,7 +68,7 @@ class JooqBookRepositoryTest(
 
     "save: 既存のデータを更新できる" {
         val original = Book.register(
-            title = "人間失格",
+            title = BookTitle.fromString("人間失格"),
             authors = emptyList()
         )
         TestUtils.insertBook(dslContext, transactionManager, original.id.value, original.title.value)
