@@ -36,7 +36,7 @@ class BookUpdateControllerTest(
     "既存のbookを更新できる" {
         val newTitle = "学問のすすめ2"
         val body = "{\"title\": \"$newTitle\"}"
-        val response = client.toBlocking().retrieve(HttpRequest.POST("${ApiPaths.Book.update}/$existingId", body))
+        val response = client.toBlocking().retrieve(HttpRequest.POST(ApiPaths.Book.update.replace("{id}", existingId.toString()), body))
         val responseData = jacksonObjectMapper().readValue<BookUpdateController.ResponseBody>(response)
 
         val result = bookRepository.find(BookId(responseData.id))
