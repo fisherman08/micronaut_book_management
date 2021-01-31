@@ -12,6 +12,7 @@ import javax.inject.Singleton
 class JooqBookRepository(
     private val context: DSLContext
 ) : BookRepository {
+
     override fun listAll(): List<Book> {
         val result =
             context

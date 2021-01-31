@@ -25,7 +25,7 @@ object TestUtils {
             val query = context.insertInto(DSL.table("book"))
                 .columns(DSL.field("id"), DSL.field("title"))
                 .values(DSL.value(id), DSL.value(title))
-            query.execute()
+            val status = query.execute()
         }
     }
 
