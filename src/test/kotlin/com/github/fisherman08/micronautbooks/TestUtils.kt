@@ -29,6 +29,15 @@ object TestUtils {
         }
     }
 
+    fun insertWriter(context: DSLContext, transactionManager: SynchronousTransactionManager<Connection>, id: UUID, name: String) {
+        transactionManager.executeWrite {
+            val query = context.insertInto(DSL.table("writer"))
+                .columns(DSL.field("id"), DSL.field("name"))
+                .values(DSL.value(id), DSL.value(name))
+            val status = query.execute()
+        }
+    }
+
     fun clear(context: DSLContext, transactionManager: SynchronousTransactionManager<Connection>, tableName: String) {
         transactionManager.executeWrite {
             val query = context.deleteFrom(DSL.table(tableName))
