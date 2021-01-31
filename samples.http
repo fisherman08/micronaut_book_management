@@ -3,4 +3,11 @@
 GET http://localhost:8080/api/book/list
 Accept: application/json
 
+# 登録
 ###
+POST http://localhost:8080/api/book/register
+Content-Type: application/json
+
+{
+  "title": "登録サンプル"
+}

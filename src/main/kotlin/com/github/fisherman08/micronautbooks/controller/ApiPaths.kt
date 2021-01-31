@@ -6,5 +6,6 @@ object ApiPaths {
     object Book {
         const val base = "${ApiPaths.base}/book"
         const val list = "$base/list"
+        const val register = "$base/register"
     }
 }
