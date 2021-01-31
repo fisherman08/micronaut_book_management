@@ -8,5 +8,6 @@ object ApiPaths {
         const val list = "$base/list"
         const val register = "$base"
         const val update = "$base/{id}"
+        const val delete = "$base/{id}"
     }
 }

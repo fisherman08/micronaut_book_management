@@ -11,3 +11,8 @@ Content-Type: application/json
 {
   "title": "登録サンプルだよ"
 }
+
+### 削除
+# 削除
+DELETE http://localhost:8080/api/book/a0f44fb0-8c25-4cbf-8bd8-bbe117e3f63f
+Content-Type: application/json
