@@ -5,9 +5,9 @@ Accept: application/json
 
 # 登録
 ###
-POST http://localhost:8080/api/book/register
+POST http://localhost:8080/api/book
 Content-Type: application/json
 
 {
-  "title": "登録サンプル"
+  "title": "登録サンプルだよ"
 }

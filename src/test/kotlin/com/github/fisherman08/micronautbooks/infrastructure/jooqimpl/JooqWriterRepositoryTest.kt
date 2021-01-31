@@ -1,7 +1,6 @@
 package com.github.fisherman08.micronautbooks.infrastructure.jooqimpl
 
 import com.github.fisherman08.micronautbooks.TestUtils
-import com.github.fisherman08.micronautbooks.domain.book.BookTitle
 import com.github.fisherman08.micronautbooks.domain.exception.NotFoundException
 import com.github.fisherman08.micronautbooks.domain.writer.Writer
 import com.github.fisherman08.micronautbooks.domain.writer.WriterId
