@@ -4,6 +4,9 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.fisherman08.micronautbooks.TestUtils
 import com.github.fisherman08.micronautbooks.controller.ApiPaths
+import com.github.fisherman08.micronautbooks.domain.book.BookId
+import com.github.fisherman08.micronautbooks.domain.book.BookRepository
+import com.github.fisherman08.micronautbooks.domain.book.BookTitle
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.micronaut.http.HttpRequestFactory
@@ -23,7 +26,8 @@ class BookRegisterControllerTest(
     @Client("/")
     private val client: HttpClient,
     private val dslContext: DSLContext,
-    private val transactionManager: SynchronousTransactionManager<Connection>
+    private val transactionManager: SynchronousTransactionManager<Connection>,
+    private val bookRepository: BookRepository
 ) : StringSpec({
 
     TestUtils.cleaAllTables(dslContext, transactionManager)
@@ -32,6 +36,10 @@ class BookRegisterControllerTest(
         val title = "登録テスト"
         val body = "{\"title\": \"$title\"}"
         val response = client.toBlocking().retrieve(io.micronaut.http.HttpRequest.POST(ApiPaths.Book.register, body))
-        jacksonObjectMapper().readValue<BookRegisterController.ResponseBody>(response).title shouldBe title
+        val responseData = jacksonObjectMapper().readValue<BookRegisterController.ResponseBody>(response)
+
+        val result = bookRepository.find(BookId(responseData.id))
+        result.id shouldBe BookId(responseData.id)
+        result.title shouldBe BookTitle.fromString(responseData.title)
     }
 })
