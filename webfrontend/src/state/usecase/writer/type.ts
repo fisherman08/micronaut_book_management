@@ -1,5 +1,5 @@
 import { TYPE } from "./constants";
-import { Book } from "../../../domain/book/Book";
+import { Writer } from "../../../domain/writer/Writer";
 
 export type GetListActionType = {
     type: typeof TYPE.GET_LIST,
@@ -9,7 +9,7 @@ export type GetListActionType = {
 export type GetListSuccessActionType = {
     type: typeof TYPE.GET_LIST_SUCCESS,
     payload: {
-        list: Book[]
+        list: Writer[]
     }
 };
 
@@ -31,7 +31,7 @@ export type GetInfoActionType = {
 export type GetInfoSuccessActionType = {
     type: typeof TYPE.GET_INFO_SUCCESS,
     payload: {
-        info: Book
+        info: Writer
     }
 };
 
