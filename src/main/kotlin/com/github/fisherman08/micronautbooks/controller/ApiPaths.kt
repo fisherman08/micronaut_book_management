@@ -11,4 +11,13 @@ object ApiPaths {
         const val update = "$base/{id}"
         const val delete = "$base/{id}"
     }
+
+    object Writer {
+        const val base = "${ApiPaths.base}/writer"
+        const val list = "$base/list"
+        const val register = "$base"
+        const val info = "$base/{id}"
+        const val update = "$base/{id}"
+        const val delete = "$base/{id}"
+    }
 }

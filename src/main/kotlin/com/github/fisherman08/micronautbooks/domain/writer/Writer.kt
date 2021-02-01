@@ -5,10 +5,10 @@ data class Writer(
     val name: WriterName
 ) {
     companion object {
-        fun register(name: String): Writer =
+        fun register(name: WriterName): Writer =
             Writer(
                 id = WriterId.generate(),
-                name = WriterName.fromString(name)
+                name = name
             )
     }
 }
