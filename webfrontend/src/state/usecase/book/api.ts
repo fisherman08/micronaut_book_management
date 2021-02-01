@@ -9,3 +9,16 @@ export function getListApiCall(
 ) {
     ApiRequest.get(ApiPaths.book.getList, {}, successHandler, failureHandler);
 }
+
+export function registerApiCall(
+    title: string,
+    authorIds: string[],
+    successHandler: ApiSuccessHandler,
+    failureHandler: ApiFailureHandler
+) {
+    const body = {
+        title: title,
+        authorIds: authorIds,
+    };
+    ApiRequest.post(ApiPaths.book.register, {}, body, successHandler, failureHandler);
+}

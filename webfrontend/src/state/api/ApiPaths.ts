@@ -10,6 +10,7 @@ export const ApiPaths = {
         logout: `${apiPrefix}/${apiPrefixAuth}/logout`,
     },
     book: {
-        getList: `${apiPrefix}/${apiPrefixBook}/list`
+        getList: `${apiPrefix}/${apiPrefixBook}/list`,
+        register: `${apiPrefix}/${apiPrefixBook}`,
     }
 };

@@ -3,4 +3,32 @@
   *:focus {
     outline: none;
   }
+
+  .page_title {
+    font-size: 20pt;
+    margin-bottom: 10px;
+  }
+
+  input[type=text] {
+    border: 1px solid black;
+  }
+
+  button, a {
+    border: 1px solid black;
+    background-color: lightgray;
+  }
+
+  table {
+    th, td {
+      padding: 4px;
+      border: 1px solid gray;
+    }
+    thead {
+      tr {
+        th {
+          background-color: lightpink;
+        }
+      }
+    }
+  }
 }

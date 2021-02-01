@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: demo
+  server:
+    netty:
+      log-level: warn
 datasources:
   default:
     url: jdbc:mysql://127.0.0.1:3316/main_db
@@ -14,4 +17,3 @@ flyway:
         - classpath:migrations
 jackson:
   serialization-inclusion: always
-

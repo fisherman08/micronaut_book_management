@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { GetListSuccessResponseType } from "./type";
 import { ApiSuccessHandler, defaultApiSuccessHandler } from "../../api/SuccessHandler";
 import { ApiFailureHandler, defaultApiFailureHandler } from "../../api/FailureHandler";
-import { getListApiCall } from "./api";
+import { getListApiCall, registerApiCall } from "./api";
 import { Book } from "../../../domain/book/Book";
 import { Writer } from "../../../domain/writer/Writer";
 
@@ -41,3 +41,31 @@ const getBookListFailureAction = (dispatch: Dispatch): ApiFailureHandler => {
         });
     });
 }
+
+export const registerBookAction = (title: string, authorIds: string[], onSuccess: () => void, onFailure: () => void) => (dispatch: Dispatch) => {
+    dispatch({
+        type: TYPE.REGISTER,
+        payload: {}
+    });
+    registerApiCall(title, authorIds, registerBookSuccessAction(dispatch, onSuccess), registerBookFailureAction(dispatch, onFailure));
+}
+
+const registerBookSuccessAction = (dispatch: Dispatch, onSuccess: () => void): ApiSuccessHandler => {
+    return defaultApiSuccessHandler(() => {
+        dispatch({
+            type: TYPE.REGISTER_SUCCESS,
+            payload: {}
+        });
+        onSuccess();
+    });
+};
+
+const registerBookFailureAction = (dispatch: Dispatch, onFailure: () => void): ApiSuccessHandler => {
+    return defaultApiSuccessHandler(() => {
+        dispatch({
+            type: TYPE.REGISTER_FAILURE,
+            payload: {}
+        });
+        onFailure();
+    });
+};

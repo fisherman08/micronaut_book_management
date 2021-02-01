@@ -27,6 +27,24 @@ export type GetListFailureActionType = {
     payload: {}
 };
 
+export type RegisterActionType = {
+    type: typeof TYPE.REGISTER,
+    payload: {}
+};
+
+export type RegisterSuccessActionType = {
+    type: typeof TYPE.REGISTER_SUCCESS,
+    payload: {}
+};
+
+export type RegisterFailureActionType = {
+    type: typeof TYPE.REGISTER_FAILURE,
+    payload: {}
+};
+
 export type ActionTypes = GetListActionType |
     GetListSuccessActionType |
-    GetListFailureActionType;
+    GetListFailureActionType |
+    RegisterActionType |
+    RegisterSuccessActionType |
+    RegisterFailureActionType;

@@ -2,6 +2,8 @@ import React from "react";
 import { useBookList } from "../../hooks/book/useBookList";
 import { Loading } from "../common/Loading";
 import { Book } from "../../../domain/book/Book";
+import { Link } from "react-router-dom";
+import { Paths } from "../../../Paths";
 
 export const BookListPage = () => {
 
@@ -11,7 +13,10 @@ export const BookListPage = () => {
 
     return (
         <div>
-            <div>Book List</div>
+            <div className={"page_title"}>書籍一覧</div>
+            <div>
+                <Link to={Paths.book.register}>書籍を追加する</Link>
+            </div>
             <table>
                 <thead>
                 <tr>

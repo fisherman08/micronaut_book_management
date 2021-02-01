@@ -15,7 +15,7 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
             return {
                 ...state,
                 bookList: null,
-            };
+            }
         }
         case TYPE.GET_LIST_SUCCESS: {
             const { list } = action.payload;
@@ -27,6 +27,22 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
         case TYPE.GET_LIST_FAILURE: {
             return {
                 ...state,
+            }
+        }
+        case TYPE.REGISTER: {
+            return {
+                ...state
+            }
+        }
+        case TYPE.REGISTER_SUCCESS: {
+            return {
+                ...state,
+                bookList: null,
+            }
+        }
+        case TYPE.REGISTER_FAILURE: {
+            return {
+                ...state
             }
         }
         default: {
