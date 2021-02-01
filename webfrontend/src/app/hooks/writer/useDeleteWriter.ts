@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteWriterAction } from "../../../state/usecase/book/actions";
+import { deleteWriterAction } from "../../../state/usecase/writer/actions";
 
 export const useDeleterWriter = () => {
     const dispatch = useDispatch();

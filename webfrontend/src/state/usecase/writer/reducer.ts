@@ -1,11 +1,11 @@
 import { Reducer } from "redux";
 import { TYPE } from "./constants";
 import { ActionTypes } from "./type";
-import { Book } from "../../../domain/book/Book";
+import { Writer } from "../../../domain/writer/Writer";
 
 export type WriterState = Readonly<{
-    writerList: Book[] | null,
-    currentInfo: Book | null,
+    writerList: Writer[] | null,
+    currentInfo: Writer | null,
 }>;
 const writerInitialState: WriterState = {
     writerList: null,

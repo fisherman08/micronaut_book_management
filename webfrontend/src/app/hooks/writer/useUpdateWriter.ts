@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
-import { registerBookAction, updateBookAction } from "../../../state/usecase/book/actions";
+import { updateWriterAction } from "../../../state/usecase/writer/actions";
 
-export const useUpdateBook = () => {
+export const useUpdateWriter = () => {
     const dispatch = useDispatch();
 
-    return (id: string, title: string, authorIds: string[], onSuccess: () => void, onFailure: () => void) => {
-        dispatch(updateBookAction(id, title, authorIds, onSuccess, onFailure))
+    return (id: string, name: string, onSuccess: () => void, onFailure: () => void) => {
+        dispatch(updateWriterAction(id, name, onSuccess, onFailure))
     };
 }
