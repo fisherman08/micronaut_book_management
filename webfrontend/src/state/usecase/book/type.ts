@@ -42,9 +42,28 @@ export type RegisterFailureActionType = {
     payload: {}
 };
 
+export type DeleteActionType = {
+    type: typeof TYPE.DELETE,
+    payload: {}
+};
+
+export type DeleteSuccessActionType = {
+    type: typeof TYPE.DELETE_SUCCESS,
+    payload: {}
+};
+
+export type DeleteFailureActionType = {
+    type: typeof TYPE.DELETE_FAILURE,
+    payload: {}
+};
+
+
 export type ActionTypes = GetListActionType |
     GetListSuccessActionType |
     GetListFailureActionType |
     RegisterActionType |
     RegisterSuccessActionType |
-    RegisterFailureActionType;
+    RegisterFailureActionType |
+    DeleteActionType |
+    DeleteSuccessActionType |
+    DeleteFailureActionType;

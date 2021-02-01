@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { GetListSuccessResponseType } from "./type";
 import { ApiSuccessHandler, defaultApiSuccessHandler } from "../../api/SuccessHandler";
 import { ApiFailureHandler, defaultApiFailureHandler } from "../../api/FailureHandler";
-import { getListApiCall, registerApiCall } from "./api";
+import { deleteApiCall, getListApiCall, registerApiCall } from "./api";
 import { Book } from "../../../domain/book/Book";
 import { Writer } from "../../../domain/writer/Writer";
 
@@ -67,5 +67,31 @@ const registerBookFailureAction = (dispatch: Dispatch, onFailure: () => void): A
             payload: {}
         });
         onFailure();
+    });
+};
+
+export const deleteBookAction = (id: string) => (dispatch: Dispatch) => {
+    dispatch({
+        type: TYPE.DELETE,
+        payload: {}
+    });
+    deleteApiCall(id, deleteBookSuccessAction(dispatch), deleteBookFailureAction(dispatch));
+}
+
+const deleteBookSuccessAction = (dispatch: Dispatch): ApiSuccessHandler => {
+    return defaultApiSuccessHandler(() => {
+        dispatch({
+            type: TYPE.DELETE_SUCCESS,
+            payload: {}
+        });
+    });
+};
+
+const deleteBookFailureAction = (dispatch: Dispatch): ApiSuccessHandler => {
+    return defaultApiSuccessHandler(() => {
+        dispatch({
+            type: TYPE.DELETE_FAILURE,
+            payload: {}
+        });
     });
 };

@@ -45,6 +45,22 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
                 ...state
             }
         }
+        case TYPE.DELETE: {
+            return {
+                ...state
+            }
+        }
+        case TYPE.DELETE_SUCCESS: {
+            return {
+                ...state,
+                bookList: null,
+            }
+        }
+        case TYPE.DELETE_FAILURE: {
+            return {
+                ...state
+            }
+        }
         default: {
             return state;
         }

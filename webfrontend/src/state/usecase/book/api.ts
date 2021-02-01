@@ -22,3 +22,11 @@ export function registerApiCall(
     };
     ApiRequest.post(ApiPaths.book.register, {}, body, successHandler, failureHandler);
 }
+
+export function deleteApiCall(
+    id: string,
+    successHandler: ApiSuccessHandler,
+    failureHandler: ApiFailureHandler
+) {
+    ApiRequest.delete(ApiPaths.book.delete.replace(/{id}/g, id), {}, {}, successHandler, failureHandler);
+}
