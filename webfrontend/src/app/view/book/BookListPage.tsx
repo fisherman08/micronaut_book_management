@@ -17,7 +17,7 @@ export const BookListPage = () => {
                 <tr>
                     <th>タイトル</th>
                     <th>著者</th>
-                    <th>著者</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
