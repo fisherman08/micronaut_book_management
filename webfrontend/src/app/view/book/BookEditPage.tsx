@@ -21,9 +21,16 @@ export const BookEditPage = () => {
 
     const [name, setName] = useState("");
 
+    const [authorIds, setAuthorIds] = useState<string[]>([]);
+
+    const handleAuthorChanged = (newAuthorIds: string[]) => {
+        setAuthorIds(newAuthorIds);
+    };
+
     useEffect(() => {
         if (book) {
             setName(book.title)
+            setAuthorIds(book.authors.map(author => author.id))
         }
     }, [book])
 
@@ -39,7 +46,7 @@ export const BookEditPage = () => {
         update(
             id,
             name,
-            [],
+            authorIds,
             () => {
                 window.alert("更新しました");
                 history.push(Paths.book.list)
@@ -57,7 +64,7 @@ export const BookEditPage = () => {
             <div className={"page_title"}>書籍編集</div>
             <BackButton/>
             <div>
-                <BookEditForm name={name} onNameChanged={handleNameChanged}/>
+                <BookEditForm name={name} onNameChanged={handleNameChanged} authorIds={authorIds} onAuthorsChanged={handleAuthorChanged}/>
                 <div>
                     <button type={"button"} onClick={handleUpdateButtonClicked}>更新する</button>
                 </div>
