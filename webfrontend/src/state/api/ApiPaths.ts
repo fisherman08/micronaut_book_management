@@ -1,6 +1,7 @@
 const apiPrefix = "/api";
 const apiPrefixAuth = "authentication";
 const apiPrefixBook = "book"
+const apiPrefixWriter = "writer"
 
 export const ApiPaths = {
     auth: {
@@ -15,5 +16,12 @@ export const ApiPaths = {
         register: `${apiPrefix}/${apiPrefixBook}`,
         update: `${apiPrefix}/${apiPrefixBook}/{id}`,
         delete: `${apiPrefix}/${apiPrefixBook}/{id}`,
+    },
+    writer: {
+        getList: `${apiPrefix}/${apiPrefixWriter}/list`,
+        getInfo: `${apiPrefix}/${apiPrefixWriter}/{id}`,
+        register: `${apiPrefix}/${apiPrefixWriter}`,
+        update: `${apiPrefix}/${apiPrefixWriter}/{id}`,
+        delete: `${apiPrefix}/${apiPrefixWriter}/{id}`,
     }
 };

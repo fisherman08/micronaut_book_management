@@ -2,13 +2,16 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import { ROOT_TYPE, RootActionTypes } from "./RootAction";
 import { bookReducer, BookState } from "./usecase/book/reducer";
+import { writerReducer, WriterState } from "./usecase/writer/reducer";
 
 export type RootState = Readonly<{
     book: BookState,
+    writer: WriterState,
 }>;
 
 const appReducer = combineReducers<RootState>({
     book: bookReducer,
+    writer: writerReducer,
 });
 
 const rootReducer = (state: RootState | undefined, action: RootActionTypes) => {

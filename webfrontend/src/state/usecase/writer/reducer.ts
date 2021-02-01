@@ -3,15 +3,15 @@ import { TYPE } from "./constants";
 import { ActionTypes } from "./type";
 import { Book } from "../../../domain/book/Book";
 
-export type BookState = Readonly<{
-    bookList: Book[] | null,
+export type WriterState = Readonly<{
+    writerList: Book[] | null,
     currentInfo: Book | null,
 }>;
-const bookInitialState: BookState = {
+const writerInitialState: WriterState = {
     writerList: null,
     currentInfo: null,
 };
-export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = bookInitialState, action): BookState => {
+export const writerReducer: Reducer<WriterState, ActionTypes> = (state: WriterState = writerInitialState, action): WriterState => {
     switch (action.type) {
         case TYPE.GET_LIST: {
             return {
