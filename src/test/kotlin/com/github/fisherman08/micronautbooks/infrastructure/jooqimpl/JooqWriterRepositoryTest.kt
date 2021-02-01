@@ -35,6 +35,26 @@ class JooqWriterRepositoryTest(
         result.size shouldBe 2
     }
 
+    "listByIds: 複数のID指定で取得できる" {
+        val id1 = UUID.randomUUID()
+        val id2 = UUID.randomUUID()
+        val id3 = UUID.randomUUID()
+        TestUtils.insertWriter(dslContext, transactionManager, id1, "aaa")
+        TestUtils.insertWriter(dslContext, transactionManager, id2, "bbb")
+        TestUtils.insertWriter(dslContext, transactionManager, id3, "ccc")
+
+        val result = repository.listByIds(
+            listOf(
+                WriterId(id1),
+                WriterId(id3)
+            )
+        )
+
+        result.size shouldBe 2
+        result[0].name.value shouldBe "aaa"
+        result[1].name.value shouldBe "ccc"
+    }
+
     "find: 存在するIDで1件取得できる" {
         val id = WriterId.generate()
         val name = WriterName.fromString("太宰治")
@@ -57,7 +77,7 @@ class JooqWriterRepositoryTest(
 
     "save: 新規登録できる" {
         val writer = Writer.register(
-            name = "三島由紀夫"
+            name = WriterName.fromString("三島由紀夫")
         )
         repository.save(writer)
 
@@ -67,7 +87,7 @@ class JooqWriterRepositoryTest(
 
     "save: 既存のデータを更新できる" {
         val original = Writer.register(
-            name = "三島由紀夫"
+            name = WriterName.fromString("三島由紀夫")
         )
 
         TestUtils.insertWriter(dslContext, transactionManager, original.id.value, original.name.value)

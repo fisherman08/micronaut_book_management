@@ -3,13 +3,9 @@ package com.github.fisherman08.micronautbooks.implementations.jooqimpl
 import com.github.fisherman08.micronautbooks.domain.exception.NotFoundException
 import com.github.fisherman08.micronautbooks.domain.writer.Writer
 import com.github.fisherman08.micronautbooks.domain.writer.WriterId
-import com.github.fisherman08.micronautbooks.domain.writer.WriterName
 import com.github.fisherman08.micronautbooks.domain.writer.WriterRepository
-import com.github.fisherman08.micronautbooks.implementations.jooqimpl.table.BookTable
 import com.github.fisherman08.micronautbooks.implementations.jooqimpl.table.WriterTable
 import org.jooq.DSLContext
-import org.jooq.Record2
-import java.util.*
 import javax.inject.Singleton
 
 @Singleton
@@ -22,7 +18,17 @@ class JooqWriterRepository(
             .from(WriterTable.table)
             .orderBy(WriterTable.name).fetch()
 
-        return result.map(::extract)
+        return result.map(WriterTable::extract)
+    }
+
+    override fun listByIds(ids: List<WriterId>): List<Writer> {
+        val result = dslContext
+            .select(WriterTable.id, WriterTable.name)
+            .from(WriterTable.table)
+            .where(WriterTable.id.`in`(ids.map { it.value }))
+            .orderBy(WriterTable.name).fetch()
+
+        return result.map(WriterTable::extract)
     }
 
     override fun find(writerId: WriterId): Writer {
@@ -30,7 +36,7 @@ class JooqWriterRepository(
             .select(WriterTable.id, WriterTable.name)
             .from(WriterTable.table)
             .where(WriterTable.id.eq(writerId.value)).fetch()
-        return result.singleOrNull()?.let(::extract) ?: throw NotFoundException(Writer::class)
+        return result.singleOrNull()?.let(WriterTable::extract) ?: throw NotFoundException(Writer::class)
     }
 
     override fun save(writer: Writer) {
@@ -47,9 +53,4 @@ class JooqWriterRepository(
         dslContext.deleteFrom(WriterTable.table).where(WriterTable.id.eq(writerId.value)).execute()
     }
 
-    private fun extract(row: Record2<Any, Any>): Writer =
-        Writer(
-            id = WriterId(UUID.fromString(row.get(WriterTable.id).toString())),
-            name = WriterName.fromString(row.get(WriterTable.name).toString())
-        )
 }
