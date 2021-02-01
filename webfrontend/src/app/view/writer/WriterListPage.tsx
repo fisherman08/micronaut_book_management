@@ -41,7 +41,7 @@ export const WriterListPage = () => {
             <table>
                 <thead>
                 <tr>
-                    <th>タイトル</th>
+                    <th>名前</th>
                     <th></th>
                 </tr>
                 </thead>
