@@ -12,4 +12,6 @@ flyway:
       enabled: true
       locations:
         - classpath:migrations
+jackson:
+  serialization-inclusion: always
 
