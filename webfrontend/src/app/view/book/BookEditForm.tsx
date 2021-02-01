@@ -43,11 +43,12 @@ export const BookEditForm = (props: BookEditFormProps) => {
         <div className={"book_edit_form"}>
             <div>
                 <label>
-                    タイトル
+                    タイトル: 
                     <input type={"text"} value={name} onChange={handleNameChanged}/>
                 </label>
             </div>
             <div>
+                <span>著者: </span>
                 {writers.map(writer => renderAuthor(writer))}
             </div>
         </div>
