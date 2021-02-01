@@ -10,6 +10,14 @@ export function getListApiCall(
     ApiRequest.get(ApiPaths.book.getList, {}, successHandler, failureHandler);
 }
 
+export function getInfoApiCall(
+    id: string,
+    successHandler: ApiSuccessHandler,
+    failureHandler: ApiFailureHandler
+) {
+    ApiRequest.get(ApiPaths.book.getInfo.replace(/{id}/g, id), {}, successHandler, failureHandler);
+}
+
 export function registerApiCall(
     title: string,
     authorIds: string[],
@@ -21,6 +29,20 @@ export function registerApiCall(
         authorIds: authorIds,
     };
     ApiRequest.post(ApiPaths.book.register, {}, body, successHandler, failureHandler);
+}
+
+export function updateApiCall(
+    id: string,
+    title: string,
+    authorIds: string[],
+    successHandler: ApiSuccessHandler,
+    failureHandler: ApiFailureHandler
+) {
+    const body = {
+        title: title,
+        authorIds: authorIds,
+    };
+    ApiRequest.post(ApiPaths.book.update.replace(/{id}/g, id), {}, body, successHandler, failureHandler);
 }
 
 export function deleteApiCall(

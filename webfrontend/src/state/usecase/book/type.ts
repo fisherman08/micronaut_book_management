@@ -13,6 +13,11 @@ export type GetListSuccessActionType = {
     }
 };
 
+export type GetListFailureActionType = {
+    type: typeof TYPE.GET_LIST_FAILURE,
+    payload: {}
+};
+
 export type GetListSuccessResponseType = {
     id: string,
     title: string,
@@ -22,8 +27,29 @@ export type GetListSuccessResponseType = {
     }[]
 }[];
 
-export type GetListFailureActionType = {
-    type: typeof TYPE.GET_LIST_FAILURE,
+export type GetInfoActionType = {
+    type: typeof TYPE.GET_INFO,
+    payload: {}
+};
+
+export type GetInfoSuccessActionType = {
+    type: typeof TYPE.GET_INFO_SUCCESS,
+    payload: {
+        info: Book
+    }
+};
+
+export type GetInfoSuccessResponseType = {
+    id: string,
+    title: string,
+    authors: {
+        id: string,
+        name: string,
+    }[]
+};
+
+export type GetInfoFailureActionType = {
+    type: typeof TYPE.GET_INFO_FAILURE,
     payload: {}
 };
 
@@ -39,6 +65,21 @@ export type RegisterSuccessActionType = {
 
 export type RegisterFailureActionType = {
     type: typeof TYPE.REGISTER_FAILURE,
+    payload: {}
+};
+
+export type UpdateActionType = {
+    type: typeof TYPE.UPDATE,
+    payload: {}
+};
+
+export type UpdateSuccessActionType = {
+    type: typeof TYPE.UPDATE_SUCCESS,
+    payload: {}
+};
+
+export type UpdateFailureActionType = {
+    type: typeof TYPE.UPDATE_FAILURE,
     payload: {}
 };
 
@@ -61,9 +102,15 @@ export type DeleteFailureActionType = {
 export type ActionTypes = GetListActionType |
     GetListSuccessActionType |
     GetListFailureActionType |
+    GetInfoActionType |
+    GetInfoSuccessActionType |
+    GetInfoFailureActionType |
     RegisterActionType |
     RegisterSuccessActionType |
     RegisterFailureActionType |
+    UpdateActionType |
+    UpdateSuccessActionType |
+    UpdateFailureActionType |
     DeleteActionType |
     DeleteSuccessActionType |
     DeleteFailureActionType;

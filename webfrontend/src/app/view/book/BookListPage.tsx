@@ -22,10 +22,11 @@ export const BookListPage = () => {
         return (
             <tr key={book.id}>
                 <td>{book.title}</td>
-                <td>{book.authors.map( author => <p>{author.name}</p>)}</td>
+                <td>{book.authors.map( author => <p key={author.id}>{author.name}</p>)}</td>
                 <td>
                     <div>
                         <button type={"button"} onClick={ () => handleDelete(book.id)}>削除</button>
+                        <Link to={Paths.book.edit.replace(/:id/g, book.id)}>編集</Link>
                     </div>
                 </td>
             </tr>

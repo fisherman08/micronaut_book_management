@@ -4,10 +4,12 @@ import { ActionTypes } from "./type";
 import { Book } from "../../../domain/book/Book";
 
 export type BookState = Readonly<{
-    bookList: Book[] | null
+    bookList: Book[] | null,
+    currentInfo: Book | null,
 }>;
 const bookInitialState: BookState = {
     bookList: null,
+    currentInfo: null,
 };
 export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = bookInitialState, action): BookState => {
     switch (action.type) {
@@ -29,6 +31,24 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
                 ...state,
             }
         }
+        case TYPE.GET_INFO: {
+            return {
+                ...state,
+                currentInfo: null,
+            }
+        }
+        case TYPE.GET_INFO_SUCCESS: {
+            const { info } = action.payload;
+            return {
+                ...state,
+                currentInfo: info,
+            }
+        }
+        case TYPE.GET_INFO_FAILURE: {
+            return {
+                ...state,
+            }
+        }
         case TYPE.REGISTER: {
             return {
                 ...state
@@ -38,6 +58,23 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
             return {
                 ...state,
                 bookList: null,
+            }
+        }
+        case TYPE.UPDATE_FAILURE: {
+            return {
+                ...state
+            }
+        }
+        case TYPE.UPDATE: {
+            return {
+                ...state
+            }
+        }
+        case TYPE.UPDATE_SUCCESS: {
+            return {
+                ...state,
+                bookList: null,
+                currentInfo: null,
             }
         }
         case TYPE.REGISTER_FAILURE: {

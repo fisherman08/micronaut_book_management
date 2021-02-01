@@ -11,7 +11,9 @@ export const ApiPaths = {
     },
     book: {
         getList: `${apiPrefix}/${apiPrefixBook}/list`,
+        getInfo: `${apiPrefix}/${apiPrefixBook}/{id}`,
         register: `${apiPrefix}/${apiPrefixBook}`,
+        update: `${apiPrefix}/${apiPrefixBook}/{id}`,
         delete: `${apiPrefix}/${apiPrefixBook}/{id}`,
     }
 };
