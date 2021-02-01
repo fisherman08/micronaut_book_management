@@ -27,6 +27,7 @@ class JooqBookRepository(
                 )
                 .from(BookTable.table)
 
+        // 著者指定
         if (authorIds.isNotEmpty()) {
             query.whereExists(
                 context.select(BookAuthorTable.bookId)
@@ -81,6 +82,7 @@ class JooqBookRepository(
     }
 
     private fun getAuthors(ids: List<UUID>): Map<UUID, List<Writer>> {
+        //TODO: 書籍の著者一覧はbookのid取得後に別クエリで取得。走るクエリは最大2回なので許容。joinしていい感じにグループ化する方法がjooqにあるなら書き換える。
         val result = context
             .select(
                 BookAuthorTable.bookId,

@@ -37,8 +37,6 @@ object TestUtils {
                 insertWriter(context, transactionManager, author)
                 insertBookAuthor(context, transactionManager, id, author.id.value)
             }
-
-
         }
     }
 
