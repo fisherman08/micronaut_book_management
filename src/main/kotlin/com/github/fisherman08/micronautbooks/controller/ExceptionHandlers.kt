@@ -20,3 +20,15 @@ class NotFoundExceptionHandler : ExceptionHandler<NotFoundException, HttpRespons
         return HttpResponse.notFound("{}")
     }
 }
+
+//TODO: NotFound以外は一旦全部500で返しておく
+@Produces
+@Singleton
+@Requirements(
+    Requires(classes = [Throwable::class, ExceptionHandler::class])
+)
+class GeneralExceptionHandler : ExceptionHandler<Throwable, HttpResponse<*>> {
+    override fun handle(request: HttpRequest<*>?, exception: Throwable?): HttpResponse<*> {
+        return HttpResponse.serverError("{}")
+    }
+}
