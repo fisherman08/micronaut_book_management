@@ -38,7 +38,7 @@ class BookInfoControllerTest(
     "指定されたIDのBook情報を取得できる" {
         val response = client.toBlocking().retrieve(ApiPaths.Book.info.replace("{id}", existingId.toString()))
 
-        val responseData = jacksonObjectMapper().readValue<BookUpdateController.ResponseBody>(response)
+        val responseData = jacksonObjectMapper().readValue<BookInfoController.ResponseBody>(response)
 
         responseData.id shouldBe existingId
         responseData.title shouldBe existingTitle

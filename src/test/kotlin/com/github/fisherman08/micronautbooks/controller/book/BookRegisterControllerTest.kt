@@ -4,9 +4,12 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.fisherman08.micronautbooks.TestUtils
 import com.github.fisherman08.micronautbooks.controller.ApiPaths
+import com.github.fisherman08.micronautbooks.domain.book.Book
 import com.github.fisherman08.micronautbooks.domain.book.BookId
 import com.github.fisherman08.micronautbooks.domain.book.BookRepository
 import com.github.fisherman08.micronautbooks.domain.book.BookTitle
+import com.github.fisherman08.micronautbooks.domain.writer.Writer
+import com.github.fisherman08.micronautbooks.domain.writer.WriterName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.micronaut.http.HttpRequest
@@ -30,14 +33,27 @@ class BookRegisterControllerTest(
 
     TestUtils.cleaAllTables(dslContext, transactionManager)
 
+    val authors = listOf(
+        Writer.register(
+            name = WriterName.fromString("a夏目漱石")
+        ),
+        Writer.register(
+            name = WriterName.fromString("b夏目漱石2世")
+        )
+    )
+
+    authors.forEach {
+        TestUtils.insertWriter(dslContext, transactionManager, it)
+    }
+
     "登録できる" {
-        val title = "登録テスト"
-        val body = "{\"title\": \"$title\"}"
+        val body = "{\"title\": \"吾輩は猫である\", \"authorIds\": [${authors.joinToString(",") { "\"${it.id.value}\"" }}]}"
         val response = client.toBlocking().retrieve(HttpRequest.POST(ApiPaths.Book.register, body))
         val responseData = jacksonObjectMapper().readValue<BookRegisterController.ResponseBody>(response)
 
         val result = bookRepository.find(BookId(responseData.id))
         result.id shouldBe BookId(responseData.id)
         result.title shouldBe BookTitle.fromString(responseData.title)
+        result.authors.size shouldBe 2
     }
 })
