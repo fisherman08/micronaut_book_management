@@ -8,6 +8,7 @@ export function IndexPage() {
             <div className={"page_title"}>ようこそ</div>
             <div>
                 <Link to={Paths.book.list}>書籍一覧</Link>
+                <Link to={Paths.writer.list}>著者一覧</Link>
             </div>
         </div>
     );

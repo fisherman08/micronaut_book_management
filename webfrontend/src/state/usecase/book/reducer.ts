@@ -8,7 +8,7 @@ export type BookState = Readonly<{
     currentInfo: Book | null,
 }>;
 const bookInitialState: BookState = {
-    writerList: null,
+    bookList: null,
     currentInfo: null,
 };
 export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = bookInitialState, action): BookState => {
@@ -16,14 +16,14 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
         case TYPE.GET_LIST: {
             return {
                 ...state,
-                writerList: null,
+                bookList: null,
             }
         }
         case TYPE.GET_LIST_SUCCESS: {
             const { list } = action.payload;
             return {
                 ...state,
-                writerList: [...list],
+                bookList: [...list],
             }
         }
         case TYPE.GET_LIST_FAILURE: {
@@ -57,7 +57,7 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
         case TYPE.REGISTER_SUCCESS: {
             return {
                 ...state,
-                writerList: null,
+                bookList: null,
             }
         }
         case TYPE.UPDATE_FAILURE: {
@@ -73,7 +73,7 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
         case TYPE.UPDATE_SUCCESS: {
             return {
                 ...state,
-                writerList: null,
+                bookList: null,
                 currentInfo: null,
             }
         }
@@ -90,7 +90,7 @@ export const bookReducer: Reducer<BookState, ActionTypes> = (state: BookState = 
         case TYPE.DELETE_SUCCESS: {
             return {
                 ...state,
-                writerList: null,
+                bookList: null,
             }
         }
         case TYPE.DELETE_FAILURE: {
