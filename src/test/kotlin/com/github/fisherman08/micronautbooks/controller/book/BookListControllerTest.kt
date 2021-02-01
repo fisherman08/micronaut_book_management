@@ -4,6 +4,10 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.fisherman08.micronautbooks.TestUtils
 import com.github.fisherman08.micronautbooks.controller.ApiPaths
+import com.github.fisherman08.micronautbooks.domain.book.Book
+import com.github.fisherman08.micronautbooks.domain.book.BookTitle
+import com.github.fisherman08.micronautbooks.domain.writer.Writer
+import com.github.fisherman08.micronautbooks.domain.writer.WriterName
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.micronaut.http.client.HttpClient
@@ -26,24 +30,41 @@ class BookListControllerTest(
 
     TestUtils.cleaAllTables(dslContext, transactionManager)
 
-    val id1 = UUID.randomUUID()
-    val title1 = "吾輩は猫である"
-    val id2 = UUID.randomUUID()
-    val title2 = "学問のすすめ"
+    val book1 = Book.register(
+        title = BookTitle.fromString("a吾輩は猫である"),
+        authors = listOf(
+            Writer.register(
+                name = WriterName.fromString("a夏目漱石")
+            ),
+            Writer.register(
+                name = WriterName.fromString("b夏目漱石2世")
+            )
+        )
+    )
 
-    TestUtils.insertBook(dslContext, transactionManager, id1, title1)
-    TestUtils.insertBook(dslContext, transactionManager, id2, title2)
+    val book2 = Book.register(
+        title = BookTitle.fromString("b学問のすすめ"),
+        authors = listOf(
+            Writer.register(
+                name = WriterName.fromString("清少納言")
+            )
+        )
+    )
+    TestUtils.insertBook(dslContext, transactionManager, book1)
+    TestUtils.insertBook(dslContext, transactionManager, book2)
 
     "全件取得される" {
 
         val expected = listOf(
             BookListController.ResponseBody(
-                id = id1,
-                title = title1
+                id = book1.id.value,
+                title = book1.title.value,
+                authors = book1.authors.map { au -> BookListController.ResponseBody.Author(id = au.id.value, name = au.name.value)}
             ),
             BookListController.ResponseBody(
-                id = id2,
-                title = title2
+                id = book2.id.value,
+                title = book2.title.value,
+                authors = book2.authors.map { au -> BookListController.ResponseBody.Author(id = au.id.value, name = au.name.value)}
             )
         )
 

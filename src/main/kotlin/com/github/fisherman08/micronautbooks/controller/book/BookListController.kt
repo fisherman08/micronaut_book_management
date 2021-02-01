@@ -15,10 +15,17 @@ class BookListController(
     @Get
     fun getlist(): List<ResponseBody> = ResponseBody.toResponseBody(getBookList())
 
-    data class ResponseBody(val id: UUID, val title: String) {
+    data class ResponseBody(val id: UUID, val title: String, val authors: List<Author>) {
+        data class Author(val id: UUID, val name: String)
         companion object {
             fun toResponseBody(books: List<Book>): List<ResponseBody> =
-                books.map { ResponseBody(id = it.id.value, title = it.title.value) }
+                books.map {
+                    ResponseBody(
+                        id = it.id.value,
+                        title = it.title.value,
+                        authors = it.authors.map { au -> Author(id = au.id.value, name = au.name.value) }
+                    )
+                }
         }
     }
 }
