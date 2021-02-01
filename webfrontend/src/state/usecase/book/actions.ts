@@ -8,12 +8,12 @@ import { Book } from "../../../domain/book/Book";
 import { Writer } from "../../../domain/writer/Writer";
 
 
-export const getBookListAction = () => (dispatch: Dispatch) => {
+export const getBookListAction = (authorIds: string[]) => (dispatch: Dispatch) => {
     dispatch({
         type: TYPE.GET_LIST,
         payload: {}
     });
-    getListApiCall(getBookListSuccessAction(dispatch), getBookListFailureAction(dispatch));
+    getListApiCall(authorIds, getBookListSuccessAction(dispatch), getBookListFailureAction(dispatch));
 }
 
 const getBookListSuccessAction = (dispatch: Dispatch): ApiSuccessHandler => {

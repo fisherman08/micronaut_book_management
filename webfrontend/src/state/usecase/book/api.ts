@@ -4,10 +4,14 @@ import { ApiFailureHandler } from "../../api/FailureHandler";
 import { ApiSuccessHandler } from "../../api/SuccessHandler";
 
 export function getListApiCall(
+    authorIds: string[],
     successHandler: ApiSuccessHandler,
     failureHandler: ApiFailureHandler
 ) {
-    ApiRequest.get(ApiPaths.book.getList, {}, successHandler, failureHandler);
+    const params = {
+        authorIds: authorIds,
+    };
+    ApiRequest.get(ApiPaths.book.getList, params, successHandler, failureHandler);
 }
 
 export function getInfoApiCall(

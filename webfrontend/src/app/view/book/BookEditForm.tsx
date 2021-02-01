@@ -15,7 +15,7 @@ export const BookEditForm = (props: BookEditFormProps) => {
     const handleAuthorChecked = (e: ChangeEvent<HTMLInputElement>) => {
         const checked = e.target.checked;
         const id = e.target.value;
-        
+
         if (!checked && authorIds.includes(id)) {
             onAuthorsChanged(
                 [...authorIds].filter( it => it !== id)
