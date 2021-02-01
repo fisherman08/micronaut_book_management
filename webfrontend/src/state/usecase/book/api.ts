@@ -8,9 +8,9 @@ export function getListApiCall(
     successHandler: ApiSuccessHandler,
     failureHandler: ApiFailureHandler
 ) {
-    const params = {
+    const params = authorIds.length? {
         authorIds: authorIds,
-    };
+    } : {};
     ApiRequest.get(ApiPaths.book.getList, params, successHandler, failureHandler);
 }
 

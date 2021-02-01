@@ -18,15 +18,23 @@ class JooqBookRepository(
     private val context: DSLContext
 ) : BookRepository {
 
-    override fun listAll(): List<Book> {
-        val result =
+    override fun list(authorIds: List<WriterId>): List<Book> {
+        val query =
             context
                 .select(
                     BookTable.id,
                     BookTable.title
                 )
                 .from(BookTable.table)
-                .orderBy(BookTable.title).fetch()
+
+        if (authorIds.isNotEmpty()) {
+            query.whereExists(
+                context.select(BookAuthorTable.bookId)
+                    .from(BookAuthorTable.table)
+                    .where(BookAuthorTable.bookId.eq(BookTable.id)).and(BookAuthorTable.authorId.`in`(authorIds.map { it.value }))
+            )
+        }
+        val result = query.orderBy(BookTable.title).fetch()
         val authors = getAuthors(result.map { it[BookTable.id] })
 
         return result.map { row ->

@@ -15,7 +15,6 @@ import io.micronaut.test.extensions.kotest.annotation.MicronautTest
 import io.micronaut.transaction.SynchronousTransactionManager
 import org.jooq.DSLContext
 import java.sql.Connection
-import java.util.*
 
 @MicronautTest
 class JooqBookRepositoryTest(
@@ -50,13 +49,22 @@ class JooqBookRepositoryTest(
         TestUtils.cleaAllTables(dslContext, transactionManager)
     }
 
-    "listAll: 前件取得できる" {
+    "list: 全件取得できる" {
         TestUtils.insertBook(dslContext, transactionManager, book1)
         TestUtils.insertBook(dslContext, transactionManager, book2)
 
-        val result = repository.listAll()
+        val result = repository.list(emptyList())
         result.size shouldBe 2
         result shouldBe listOf(book1, book2)
+    }
+
+    "list: 著者ID指定で取得できる" {
+        TestUtils.insertBook(dslContext, transactionManager, book1)
+        TestUtils.insertBook(dslContext, transactionManager, book2)
+
+        val result = repository.list(book1.authors.map { it.id })
+        result.size shouldBe 1
+        result shouldBe listOf(book1)
     }
 
     "find: 存在するIDで1件取得できる" {
